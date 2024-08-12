@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function UpdateCard() {
   const [desc, setDesc] = useState("");
@@ -9,14 +10,35 @@ export default function UpdateCard() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { id } = useParams();
+  const params = useParams();
 
+  const id = params.id;
+
+  if (id != null || id != undefined) {
+    useEffect(() => {
+      getQuestion(id);
+    }, [id]);
+  }
+
+  async function getQuestion(id) {
+    const res = await fetch(`/api/getquestion?id=${id}`);
+    const data = await res.json();
+    setDesc(data.desc);
+    setAnswer(data.answer);
+    setAnswers(data.answers);
+    if (!res.ok) {
+      throw new Error("couldn't get card");
+    }
+    setDesc(data.desc);
+    setAnswer(data.answer);
+    setAnswers(data.answers);
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
     console.log(id);
-    const result = {id, desc, answers, answer }
+    const result = { id, desc, answers, answer };
     try {
       const response = await fetch("/api/updateCard", {
         // Adjust the API route if needed

@@ -6,7 +6,7 @@ export default function AdminPage() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  
+
   useEffect(() => {
     getAllCards();
   }, []);
@@ -51,15 +51,28 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="flex justify-center items-center w-full  min-h-screen  bg-gray-100 p-8">
+    <div className="flex justify-center items-center w-full  min-h-screen  p-8">
       {loading ? (
-        <div>Loading...</div>
+        <div class="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
+          <div class="flex justify-center">
+            <div
+              class="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500"
+              role="status"
+              aria-label="loading"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full justify-start">
           {cards.map((card) => (
-            <div key={card.id} className="rounded-lg shadow-lg bg-white p-6">
-              <div className="mb-4">
-                <h1 className="text-2xl font-bold text-gray-800">
+            <div
+              key={card.id}
+              className="rounded-lg flex flex-col justify-between shadow-lg bg-white p-6"
+            >
+              <div className="mb-4 flex flex-col justify-between h-full">
+                <h1 className="text-2xl font-bold overflow-hidden text-gray-800">
                   {card.desc}
                 </h1>
                 <div className="mt-2">

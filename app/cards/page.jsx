@@ -13,20 +13,22 @@ const page = async () => {
   }
 
   return (
-    <div className="flex justify-center items-center w-full  min-h-screen  bg-gray-100 p-8">
+    <div className="flex justify-center items-center w-full  min-h-screen   p-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full justify-start">
         {card.map((card) => (
           <Link
             href={`/cards/${card.id}`}
             key={card.id}
-            className="rounded-lg shadow-lg bg-white p-6"
+            className="rounded-lg shadow-sm bg-white p-6"
           >
-            <div className="mb-4">
-              <h1 className="text-2xl font-bold text-gray-800">{card.desc}</h1>
+            <div className="mb-4 h-full flex flex-col justify-between">
+              <h1 className="text-2xl font-bold overflow-hidden text-gray-800">
+                {card.desc}
+              </h1>
               <div className="mt-2">
                 {card.answers.map((answer, index) => (
                   <p key={index} className="text-gray-600">
-                    {`${index+1}. ${answer}`}
+                    {`${index + 1}. ${answer}`}
                   </p>
                 ))}
               </div>

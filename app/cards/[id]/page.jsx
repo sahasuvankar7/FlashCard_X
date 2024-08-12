@@ -1,7 +1,5 @@
-"use client";
-import React, { useEffect } from "react";
+import React from "react";
 import prisma from "@/lib/db";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Card from "@/components/Card";
 
@@ -27,16 +25,13 @@ const Page = async ({ params }) => {
   const lowestId = lowestQuestion?.id;
   const highestId = highestQuestion?.id;
 
-
-
   return (
-    <div className="pt-20 h-screen bg-gray-100 flex flex-col items-center">
+    <div className="pt-20 h-screen  flex flex-col items-center">
       <Card
         question={question}
         lowestId={lowestId}
         highestId={highestId}
         id={id}
-        
       />
     </div>
   );

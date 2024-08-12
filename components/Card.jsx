@@ -10,13 +10,15 @@ const Card = ({ question, lowestId, highestId, id }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full min-w-[50vw] min-h-[50vh] w-full">
+    <div className="flex flex-col items-center justify-center h-full cursor-pointer max-w-screen-lg  w-full ">
       {result ? (
         <div
-          className="text-left border-2 border-gray-950 p-10 rounded-md mb-10 shadow-md bg-white w-full "
+          className="text-left border-2 hover:border-gray-950 p-10 rounded-md mb-10 shadow-md min-w-[50vw] min-h-[50vh] bg-white w-full active:scale-[.98] transition-app duration-200"
           onClick={handleChange}
         >
-          <h1 className="font-bold text-lg mb-4 overflow-hidden">{question.desc}</h1>
+          <h1 className="font-bold text-lg mb-4 overflow-hidden">
+            {question.desc}
+          </h1>
           <div className="space-y-2">
             {question.answers.map((ans, index) => (
               <p className="font-semibold text-base" key={index}>{`${
@@ -27,7 +29,7 @@ const Card = ({ question, lowestId, highestId, id }) => {
         </div>
       ) : (
         <div
-          className="text-left border-2 border-gray-950 p-10 rounded-md mb-10 shadow-md bg-white w-full "
+          className="text-left border-2 hover:border-gray-950 p-10 rounded-md mb-10 shadow-md min-w-[50vw] min-h-[50vh] bg-white w-full active:scale-[.98] transition-app duration-200"
           onClick={handleChange}
         >
           <h1 className="font-bold text-lg mb-4">Result</h1>

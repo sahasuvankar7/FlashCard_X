@@ -4,12 +4,12 @@ import { redirect } from "next/navigation";
 export default async function Home() {
   const session = await auth();
   const user = session?.user;
-  if(user) {
-    redirect('/cards');
-  } 
+  if (user) {
+    redirect("/cards");
+  }
   return (
-    <div className="h-full w-full bg-pink-50 min-h-screen">
-      Please Signin
+    <div className="h-full w-full min-h-screen text-center flex justify-center text-3xl font-bold ">
+      Please Signin to continue
     </div>
-  )
+  );
 }
