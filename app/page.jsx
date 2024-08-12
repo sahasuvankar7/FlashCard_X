@@ -8,7 +8,7 @@ export default async function Home() {
     redirect("/cards");
   }
   return (
-    <div className="h-full w-full min-h-screen text-center flex justify-center text-3xl font-bold ">
+    <div className="h-full w-full min-h-screen text-center items-center flex justify-center text-3xl font-bold ">
       Please Signin to continue
     </div>
   );
