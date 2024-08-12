@@ -1,0 +1,15 @@
+import Link from "next/link";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+export default async function Home() {
+  const session = await auth();
+  const user = session?.user;
+  if(user) {
+    redirect('/cards');
+  } 
+  return (
+    <div className="h-full w-full bg-pink-50 min-h-screen">
+      Please Signin
+    </div>
+  )
+}
