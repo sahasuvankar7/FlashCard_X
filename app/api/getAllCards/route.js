@@ -1,7 +1,6 @@
 export const dynamic = "force-dynamic";
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
-export const runtime = 'edge';
 // get all cards
 export async function GET() {
   try {

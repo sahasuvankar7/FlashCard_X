@@ -2,7 +2,6 @@ import React from "react";
 import prisma from "@/lib/db";
 import { notFound } from "next/navigation";
 import Card from "@/components/Card";
-export const runtime = 'edge';
 
 const Page = async ({ params }) => {
   const id = Number(params.id);
