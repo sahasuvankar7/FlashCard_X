@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 export const runtime = "edge" // optional
 export default function errorpage() {
@@ -18,7 +17,7 @@ export default function errorpage() {
           </p>
           <div className="flex items-center space-x-5 mt-8 sm:mt-10">
             <Link href="/">
-              <Button>Go to Homepage</Button>
+              <button>Go to Homepage</button>
             </Link>
           </div>
         </div>
