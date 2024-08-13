@@ -1,6 +1,5 @@
 import React from "react";
-import { notFound, redirect } from "next/navigation";
-import Link from "next/link";
+import {  redirect } from "next/navigation";
 import { auth } from "../../auth";
 const layout = async ({ children }) => {
   const session = await auth();
