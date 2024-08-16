@@ -2,18 +2,21 @@ import React from "react";
 import Link from "next/link";
 import { auth } from "@/auth";
 import Image from "next/image";
+import { ModeToggle } from "./ModeToggle";
 
 export default async function Navbar() {
   const session = await auth();
   const user = session?.user;
 
   return (
-    <header className="flex justify-between items-center px-5 py-3 bg-gray-800 text-white shadow-md">
+    <header className="flex justify-between items-center px-5 py-3 
+    border-[0.1px] border-b-slate-300 shadow-md fixed w-full">
       <Link href="/" className="flex items-center gap-3">
         <h1 className="text-2xl font-bold">FlashCard</h1>
       </Link>
 
       <nav className="flex items-center gap-5">
+        <ModeToggle/>
         {user && (
           <Link href="/cards" className="hover:text-gray-300">
             Cards

@@ -10,7 +10,7 @@ const Card = ({ question, lowestId, highestId, id }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full cursor-pointer max-w-screen-lg  w-full ">
+    <div className="flex flex-col items-center justify-center h-full cursor-pointer max-w-screen-lg  w-full">
       {result ? (
         <div
           className="text-left border-2 hover:border-gray-950 p-10 rounded-md mb-10 shadow-md min-w-[50vw] min-h-[50vh] bg-white w-full active:scale-[.98] transition-app duration-200"
