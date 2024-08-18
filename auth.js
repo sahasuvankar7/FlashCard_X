@@ -9,6 +9,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
+    maxAge: 15*30,
   },
   providers: [
     CredentialsProvider({
@@ -22,9 +23,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: "Password", type: "password" },
       },
     authorize:async (credentials)=>{
-      if(!credentials ||!credentials.email || !credentials.password){
-        console.log("fucked up")
-        return "wrong";
+      if(!credentials?.email || !credentials?.password){
+       throw new Error("Invalid credentials");
       }
       const email = credentials.email;
       const password = credentials.password;
@@ -59,6 +59,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.AUTH_GITHUB_SECRET,
     }),
   ],
+  callbacks:{
+    async jwt({token,user}){
+      if(user){
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.role = user.role;
+
+      }
+      return token;
+    },
+    async session({session , token}){
+      if(token){
+        session.user.id = token.id;
+        session.user.email = token.email;
+        session.user.name = token.name;
+        session.user.role = token.role;
+      }
+      return session;
+    }
+  },
   pages: {
     signIn: "/login",
   },

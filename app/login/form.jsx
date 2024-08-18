@@ -7,10 +7,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
-import {login, loginWithCredentials} from "@/actions/auth";
+import { login, loginWithCredentials } from "@/actions/auth";
 import AuthButton from "@/components/AuthButton";
+import { useToast } from "@/components/ui/use-toast";
 
-
+import { useSession } from "next-auth/react";
 const FormSchema = z.object({
   email: z.string().email({
     message: "Invalid email address.",
@@ -22,6 +23,11 @@ const FormSchema = z.object({
 
 export default function LoginForm() {
   const router = useRouter();
+  const { toast } = useToast();
+  const { data: session, status } = useSession();
+  // if(!session?.user){
+  //   redirect('/login');
+  // }
 
   const form = useForm({
     resolver: zodResolver(FormSchema),
@@ -63,21 +69,42 @@ export default function LoginForm() {
 
   return (
     <div className="w-full max-w-md mx-auto ">
-        <div className="pb-5 mb-4  ">
-        <h3 className="text-slate-300 font-semibold font-mono text-xl text-center ">Login</h3>
-        </div>
-      <form action={async (formdata)=>{
-        const email = formdata.get("username");
-        const password = formdata.get("password");
-        const result = await loginWithCredentials({email,password})
-        if(result) {
-          console.log("success");
-          window.location.reload(); 
-          redirect('/cards');
-        }else{
-          console.error("error");
-        }
-      }} className="space-y-6">
+      <div className="pb-5 mb-4  ">
+        <h3 className="text-slate-300 font-semibold font-mono text-xl text-center ">
+          Login
+        </h3>
+      </div>
+      <form
+        action={async (formdata) => {
+          const email = formdata.get("username");
+          const password = formdata.get("password");
+          const result = await loginWithCredentials({ email, password });
+          if (result?.success) {
+            console.log("success");
+
+            router.push("/cards");
+            router.refresh();
+            toast({
+              title: "Login Successfully",
+              description: "Your login was successful",
+              variant: "success",
+              className: "bg-green-600 text-white",
+              duration: 9000,
+              isClosable: true,
+            });
+          } else {
+            console.error("error");
+            toast({
+              title: "Failed to Login",
+              description: "Invalid Credentials",
+              variant: "destructive",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
+        }}
+        className="space-y-6"
+      >
         <div>
           <label htmlFor="username" className="block text-sm font-medium">
             Username (Email)
@@ -115,22 +142,45 @@ export default function LoginForm() {
             </p>
           )}
         </div>
-      
 
-     <AuthButton/>
+        <AuthButton />
         <div
-        onClick={()=>login('github')}
-        className="w-full flex items-center justify-center gap-2  hover:cursor-pointer mt-6 h-14 bg-slate-900 rounded-md">
-          <FaGithub className="text-white"/>
-            <p className="text-slate-300">Login with Github</p>
-          
+          onClick={async () => {
+            const res = await login("github");
+            if (res) {
+              router.push("/cards");
+              router.refresh();
+              toast({
+                title: "Login Successfully",
+                description: "Your login was successful",
+                variant: "success",
+                className: "bg-green-600 text-white",
+                duration: 9000,
+                isClosable: true,
+              });
+            } else {
+              toast({
+                title: "Failed to Login",
+                description: "Invalid Credentials",
+                variant: "destructive",
+                duration: 9000,
+                isClosable: true,
+              });
+            }
+          }}
+          className="w-full flex items-center justify-center gap-2  hover:cursor-pointer mt-6 h-14 bg-slate-900 rounded-md"
+        >
+          <FaGithub className="text-white" />
+          <p className="text-slate-300">Login with Github</p>
         </div>
       </form>
-      <Link href="/register" className="text-red-500 hover:text-red-600 flex justify-between mt-5">
+      <Link
+        href="/register"
+        className="text-red-500 hover:text-red-600 flex justify-between mt-5"
+      >
         <p>Don't have any account yet?</p>
         Register
-        </Link>
-
+      </Link>
     </div>
   );
 }

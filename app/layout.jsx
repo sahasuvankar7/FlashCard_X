@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
+import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -25,7 +26,10 @@ export default async function RootLayout({ children }) {
             disableTransitionOnChange
           >
             <Navbar />
-            <main className="py-16">{children}</main>
+            <main className="py-16">
+              {children}
+            </main>
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

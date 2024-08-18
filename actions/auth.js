@@ -65,6 +65,7 @@ export const loginWithCredentials = async ({email,password}) => {
    const result =  await signIn("credentials", {
       email,
       password,
+      redirect:false,
       
     });
     if(result?.error){
@@ -73,7 +74,7 @@ export const loginWithCredentials = async ({email,password}) => {
     // if (result?.ok) {
     //   revalidatePath("/");
     // }
-    return { success: true, message: "Login successful" ,result};
+    return { success: true, message: "Login successful" };
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -86,7 +87,6 @@ export const loginWithCredentials = async ({email,password}) => {
     // return null;
   }
 
-  // window.location.reload(); 
   revalidatePath("/cards");
 };
 

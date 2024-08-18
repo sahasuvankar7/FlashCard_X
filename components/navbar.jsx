@@ -20,7 +20,7 @@ export default async function Navbar() {
       <nav className="flex items-center gap-5">
         <ModeToggle/>
         {user && (
-          <Link href="/cards" className="hover:text-gray-300">
+          <Link href="/cards" className="hover:text-gray-500  font-semibold text-lg hover:duration-200">
             Cards
           </Link>
         )}
@@ -35,12 +35,12 @@ export default async function Navbar() {
           </Link>
         )}
         {user ? (
-          <Link href="/api/auth/signout" className="hover:text-gray-300">
-            Sign Out
+          <Link href="/api/auth/signout" className="">
+            <button className="bg-black border-[0.1px] py-2 px-4 font-semibold rounded-md text-slate-300 hover:text-gray-300 hover:bg-slate-800 hover:scale-105 duration-300">Sign Out</button>
           </Link>
         ) : (
           <Link href="/login" className="hover:text-gray-300">
-            Sign In
+                <button className="bg-black border-[0.1px] py-2 px-4 font-semibold rounded-md text-slate-300 hover:text-gray-300 hover:bg-slate-800 hover:scale-105 duration-300">Sign In</button>
           </Link>
         )}
         {user && user?.image ? (
@@ -53,7 +53,7 @@ export default async function Navbar() {
         />
       ) : (
         <div
-          className="flex items-center justify-center w-10 h-10 bg-red-500 rounded-full text-white font-bold border-2 border-white"
+          className="flex items-center justify-center w-10 h-10 bg-yellow-500 rounded-full text-white font-bold border-2 border-white"
           style={{ width: 40, height: 40 }}
         >
           {user?.name?.slice(0, 1).toUpperCase() || "?"}
