@@ -8,8 +8,12 @@ export default async function Home() {
     redirect("/cards");
   }
   return (
-    <div className="h-full w-full min-h-screen text-center items-center flex justify-center text-3xl font-bold ">
-      Please Signin to continue
+    <div className="h-full w-full min-h-screen text-center items-center flex justify-center text-3xl font-semibold ">
+  <Link href='/login'>
+      <button className="bg-black text-slate-400 rounded-md border-[0.1px] border-slate-300 px-6 py-4 font-sans transition hover:scale-105">
+      Please Signin to Continue
+      </button>
+  </Link>
     </div>
   );
 }

@@ -41,7 +41,7 @@ const Card = ({ question, lowestId, highestId, id }) => {
         >
           <h1 className="font-bold text-2xl mb-4">Result</h1>
           <p className="font-semibold text-lg"> {question.answer}</p>
-          <div className=" w-full flex justify-center mt-6  relative top-24">
+          <div className=" w-full flex justify-center mt-20">
             <button className="rounded-md bg-slate-900 text-gray-300 py-3 px-4 font-semibold hover:bg-black hover:scale-105 duration-300 ">
               Back to Question
             </button>

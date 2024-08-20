@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
 
 export default function UpdateCard() {
   const [desc, setDesc] = useState("");
@@ -13,6 +12,7 @@ export default function UpdateCard() {
   const params = useParams();
 
   const id = params.id;
+
 
   if (id != null || id != undefined) {
     useEffect(() => {

@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
 import { Toaster } from "@/components/ui/toaster"
+import UpArrow from "@/components/UpArrow";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -27,6 +28,7 @@ export default async function RootLayout({ children }) {
           >
             <Navbar />
             <main className="py-16">
+            <UpArrow />
               {children}
             </main>
             <Toaster />

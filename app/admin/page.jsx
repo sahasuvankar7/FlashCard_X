@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
 
 export default function AdminPage() {
   const [cards, setCards] = useState([]);
@@ -39,6 +40,14 @@ export default function AdminPage() {
 
     console.log(res);
     if (res.ok) {
+      toast({
+        title: "Success",
+        description: "Card deleted successfully",
+        type: "success",
+        duration:9000,
+        className:"bg-green-600 text-white"
+
+      })
     } else {
       setCards(pervCards);
       throw new Error("couldn't delete card");
@@ -65,29 +74,18 @@ export default function AdminPage() {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full justify-start">
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full justify-start  ">
           {cards.map((card) => (
             <div
               key={card.id}
-              className="rounded-lg flex flex-col justify-between shadow-lg bg-white p-6"
+              className="rounded-lg flex flex-row justify-between  items-center shadow-lg bg-slate-800 p-6 gap-4 border-[0.1px] border-gray-300"
             >
-              <div className="mb-4 flex flex-col justify-between h-full">
-                <h1 className="text-2xl font-bold overflow-hidden text-gray-800">
+              <div className="flex flex-col justify-center text-slate-300 items-center ">
+                <h1 className="text-lg font-mono font-medium overflow-hidden ">
                   {card.desc}
                 </h1>
-                <div className="mt-2">
-                  {card.answers.map((answer, index) => (
-                    <p key={index} className="text-gray-600">
-                      {`${index + 1}. ${answer}`}
-                    </p>
-                  ))}
-                </div>
-
-                <div className="py-3 ">
-                  <span>Ans : {card.answer}</span>
-                </div>
               </div>
-              <div className="mt-6 flex justify-between">
+              <div className="flex flex-row items-center gap-2">
                 <button
                   className="rounded-lg border-[1px] border-blue-500 bg-blue-500 text-white px-4 py-2 font-semibold hover:bg-blue-600"
                   onClick={() => updateCard(card.id)}
